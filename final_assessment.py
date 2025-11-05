@@ -1,4 +1,5 @@
-#I acknowledge the use of Microsoft Copilot (https://copilot.microsoft.com/) to create the code in this file
+
+# I acknowledge the use of Microsoft Copilot (https://copilot.microsoft.com/) to create the code in this file
 
 import tkinter as tk
 import random
@@ -21,6 +22,9 @@ def check_guess():
             result_label.config(text=f"❌ Nope! It was {secret_number}. Try again!")
     except ValueError:
         result_label.config(text="Please enter a valid number.")
+    
+    # Clear the entry box after each guess
+    entry.delete(0, tk.END)
 
 # GUI elements
 instruction_label = tk.Label(window, text="Guess a number between 1 and 10:")
