@@ -18,8 +18,9 @@ def check_guess():
         guess = int(entry.get())
         if guess == secret_number:
             result_label.config(text="🎉 You guessed it! Well done!")
+            guess_button.config(state="disabled")  # Disable button after correct guess
         else:
-            result_label.config(text=f"❌ Nope! It was {secret_number}. Try again!")
+            result_label.config(text="❌ Nope! Try again!")
     except ValueError:
         result_label.config(text="Please enter a valid number.")
     
