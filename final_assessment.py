@@ -7,7 +7,7 @@ import random
 # Create the main window
 window = tk.Tk()
 window.title("Number Guessing Game")
-window.geometry("300x200")
+window.geometry("300x250")
 
 # Generate the secret number
 secret_number = random.randint(1, 10)
@@ -18,14 +18,23 @@ def check_guess():
         guess = int(entry.get())
         if guess == secret_number:
             result_label.config(text="🎉 You guessed it! Well done!")
-            guess_button.config(state="disabled")  # Disable button after correct guess
+            guess_button.config(state="disabled")  # Disable guess button
+            play_again_button.pack(pady=5)         # Show play again button
         else:
             result_label.config(text="❌ Nope! Try again!")
     except ValueError:
         result_label.config(text="Please enter a valid number.")
     
-    # Clear the entry box after each guess
     entry.delete(0, tk.END)
+
+# Function to reset the game
+def play_again():
+    global secret_number
+    secret_number = random.randint(1, 10)
+    result_label.config(text="")
+    entry.delete(0, tk.END)
+    guess_button.config(state="normal")
+    play_again_button.pack_forget()  # Hide play again button
 
 # GUI elements
 instruction_label = tk.Label(window, text="Guess a number between 1 and 10:")
@@ -39,6 +48,9 @@ guess_button.pack(pady=5)
 
 result_label = tk.Label(window, text="")
 result_label.pack(pady=10)
+
+play_again_button = tk.Button(window, text="Play Again", command=play_again)
+# Don't show it until needed
 
 # Run the GUI loop
 window.mainloop()
